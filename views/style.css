@@ -1,0 +1,139 @@
+body {
+    display: flex;
+    justify-content: center;
+    font-family:Arial, Helvetica, sans-serif;
+background-color: rgb(226, 226, 226);
+
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width:500px;
+    height:800px;
+    background-color: aliceblue;
+}
+
+.heading{
+    display:flex;
+    justify-content: center;
+    margin:10px;
+
+}
+
+
+input{
+    margin:20px;
+    margin-left:20px;
+    margin-right:20px;
+    height:40px;
+    border:none;
+}
+
+button[type="submit"]{
+    height:60px;
+    width:150px;
+    margin:10px;
+
+}
+button[type="submit"]:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    transition-duration: 0.2s;
+}
+button.add{
+    background-color: rgb(55, 195, 255);
+    color:white;
+    border:none;
+}
+input[value="DELETE"]{
+    background-color: rgb(71, 71, 71);
+    color:white;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+}
+
+#sel{
+    margin:20px;
+    margin-left:20px;
+    margin-right:20px;
+    height:30px;
+    border: none;
+  border-bottom: 1px solid #ccc;
+    background-color: aliceblue;
+    
+}
+#desc::placeholder{
+    padding-left: 5px;
+}
+#desc:focus{
+    outline: none;
+}
+
+#desc{
+    background-color: aliceblue;
+    border: none;
+  border-bottom: 1px solid #ccc;
+}
+
+li{
+    display: flex;
+    height:60px;
+    margin:10px;
+    background-color: white;
+}
+ul{
+    margin:10px;
+    padding:0px;
+}
+
+
+
+/* Style the label */
+label {
+    display: block;
+    margin-left:25px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  /* Style the date and time inputs */
+  .datetime-input {
+    display: flex;
+   align-items: center;
+    width:450px;
+    height: 40px;
+margin:10px;
+   padding: 10px;
+  }
+  
+  .datetime{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .datetime-input input[type="date"],
+  .datetime-input input[type="time"] {
+    border: none;
+    background-color: rgb(184, 184, 184);
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    padding:30px;
+    color:white;
+    margin:1px;
+    flex: 1;
+  }
+  
+  
+  
+  .datetime-input input[type="date"]:focus,
+  .datetime-input input[type="time"]:focus {
+    outline: none;
+  }
+  

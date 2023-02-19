@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title>
+            <%= title%>
+        </title>
+
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="main">
+            <form action="/" method="post">
+            <h1 class = 'heading'>TO-DO app</h1>
+            <label for="desc">Description:</label>
+
+            <input type="text" name="desc" id="desc" placeholder="Description....">
+            
+            <label for="sel">Category:</label>
+
+            <select name="sel" id="sel" placeholder="select option">
+                <option value="select" disabled selected>select option...</option>
+                <option value="work">work</option>
+                <option value="personal">personel</option>
+                <option value="event">event</option>
+                <option value="home">home</option>
+            </select>
+            <label for="datetime">Date and Time:</label>
+<div class="datetime">
+
+<div class="datetime-input">
+    
+        <input type="date" name="date" id="date" required>
+        <input type="time" name="time" id="time" required>
+    </div>
+  
+</div>
+
+            <div class="buttons">
+                <button type="submit" class="add">ADD</button>
+                <button type="button" class="del"> remove</button>
+
+            </div>
+            
+            <ul>
+
+                <% for ( let i=0; i < data.length ; i++ ){ %>
+                    <li><%= data[i].sel %> </li>
+                    <% } %>
+                
+
+            </ul>
+        </div>
+    </form>
+    </body>
+</html>
