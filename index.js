@@ -38,17 +38,19 @@ app.use(express.static('views'));
 app.set('view engine','ejs');
 app.set('views','./views');
 
-
+  
 
 const bodyParser = require('body-parser');
 const fs = require('fs'); //TO READ JSON FILE
 
 app.use(bodyParser.urlencoded({ extended: true }));
-let data=[];
+
+
 
 //HANDLES THE THE FORM DATA WHEN SUBMITTED
 app.post('/', function(req, res) {
-  
+  let data =[];
+  console.log('hello');
 const currentData = req.body;
 const raw = fs.readFileSync('data.json');
 
@@ -74,19 +76,59 @@ fs.writeFile('data.json', JSON.stringify(data), 'utf8', (err) => {
           console.error(err);
           res.send('write error');
         } else {
-            console.log("success");
+            
           res.send('Success');
         }
       });
 
   var home = 'home';
-  console.log(data);
-  res.render('home.ejs', { data: data, title:home });
+  
+  res.render('home', { data: data, title:home });
+  
   
 });
 
-// console.log(MongoClient.getMongo());
+//remove task 
+app.post('/remove', function(req, res) {
+  let data =[];
+  console.log('remove');
 
+const raw = fs.readFileSync('data.json');
+//CHECK IS JSON FILE IS EMPTY AND HANDLE ACCORDINGLY
+if(raw == ''){
+  console.log("removed empty");
+  res.render('home', { data: data, title:home });
+}
+else{
+  let firstElement = JSON.parse(raw);
+  //EXISTING JSON DATA IS CONVERTED TO AN ARRAY AND PUSHED INTO THE NEW ARRAY
+  //THIS STEP IS DUE TO THE NESTING FORMED IN JSON DATA WHEN TRIED TO PUSH ARRAY DATA DIRECTLY INTO JSON FILE
+  firstElement.forEach(element => {
+   data.push(element);
+  });
+ data.pop();
+ console.log("popped")
+}
+
+ 
+// Convert JavaScript array back to JSON and write to file
+fs.writeFile('data.json', JSON.stringify(data), 'utf8', (err) => {
+        if (err) {
+          console.error(err);
+          res.send('write error');
+        } else {
+            console.log("remove and write success");
+          
+        }
+      });
+
+  
+  console.log(data);
+  res.render('home.ejs', { data: data, title:'home' });
+  
+  
+});
+// console.log(MongoClient.getMongo());
 
 app.listen(port, function(err){
     if(err){

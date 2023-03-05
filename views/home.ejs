@@ -4,7 +4,9 @@
             <%= title%>
         </title>
 
+        <script src="https://kit.fontawesome.com/5c4e0f9d2e.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script>
     </head>
     <body>
         <div class="main">
@@ -36,19 +38,38 @@
 
             <div class="buttons">
                 <button type="submit" class="add">ADD</button>
-                <button type="button" class="del"> remove</button>
+                <button type="button" id="delete" class="del">REMOVE</button>
 
             </div>
             
-            <ul>
-
-                <% for ( let i=0; i < data.length ; i++ ){ %>
-                    <li><%= data[i].sel %> </li>
-                    <% } %>
-                
-
-            </ul>
-        </div>
+            
+        
     </form>
+    <div class="scrollable">
+    <div class="list">
+        
+        <% for ( let i = data.length-1 ; i >= 0 ; i-- ){  %>
+            <div class="list-item">
+                <input type="checkbox">
+                <div class="sec1">
+                <span class="description"><%= data[i].desc %></span>
+            
+                <div class="sec2">
+                <span class="time"><%= data[i].time %></span>
+                <span class="date"><%= data[i].date %></span>
+            </div>
+                </div>  
+                
+                <span class="cat"><%= data[i].sel %> </span> 
+               
+
+            </div>
+            <% } %>
+        
+
+        </div>
+</div>
+</div>
+    
     </body>
 </html>
