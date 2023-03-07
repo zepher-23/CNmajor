@@ -35,8 +35,9 @@ background-color: rgb(226, 226, 226);
     justify-content: center;
     width:600px;
     height:600px;
-    background-color: rgb(145, 145, 145);
-    color:#ffffff;
+    background-color: #ECF2FF;
+    color:#3E54AC;
+    box-shadow: #3E54AC 0px 20px 30px -10px;
 }
 
 
@@ -68,8 +69,8 @@ button[type="submit"]:hover{
     transition-duration: 0.2s;
 }
 button.add{
-    background-color: #37c3ff;
-    color:white;
+    background-color: #3E54AC;
+    color:#ECF2FF;
     border:none;
 }
 button.del {
@@ -77,7 +78,7 @@ width:100px;
 height:40px;
 margin:10px;
 border:none;
-color:white;
+color:#ECF2FF;
 background-color: #ff5d55;
 
 }
@@ -100,8 +101,8 @@ button.del:hover{
     margin-right:20px;
     height:30px;
     border: none;
-  border-bottom: 1px solid #ccc;
-    background-color: rgb(145, 145, 145);
+  border-bottom: 1px solid #ECF2FF;
+    background-color: #BFACE2;
     
 }
 #desc::placeholder{
@@ -109,13 +110,13 @@ button.del:hover{
 }
 #desc:focus{
     outline: none;
-    background-color: rgb(145, 145, 145);
+    background-color: #BFACE2;
 }
 
 #desc{
-    background-color: rgb(145, 145, 145);
+    background-color: #BFACE2;
     border: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ECF2FF;
 }
 
 .list-item{
@@ -129,25 +130,25 @@ button.del:hover{
   
  
  
-  border-bottom: 1px solid rgb(213, 213, 213);
+  border-bottom: 1px solid #ECF2FF;
 }
 .green{
   color:green;
 }
 .white{
-  color:white;
+  color:ECF2FF;
 }
 .sec1{
   display: flex;
   flex-direction: column;
   width:150px;
-  color:white;
+  color:ECF2FF;
 
 }
 .sec2 {
   display: flex;
   flex-direction: row;
-  color:#ffffff;
+  color:#BFACE2;
   font-weight: 600;
 }
 .description {
@@ -166,7 +167,7 @@ input[type = 'checkbox'] {
 .cat {
   width:70px;
   font-size: small;
-  color: #ffffff;
+  color: #BFACE2;
   
 }
 .list{
@@ -209,11 +210,11 @@ margin:10px;
   .datetime-input input[type="date"],
   .datetime-input input[type="time"] {
     border: none;
-    background-color: rgb(184, 184, 184);
+    background-color: #BFACE2;
     font-size: 13px;
     font-family: Arial, sans-serif;
     padding:10px;
-    color:white;
+    color:#3E54AC;
     margin:1px;
     flex: 1;
   }
@@ -232,7 +233,7 @@ margin:10px;
    margin-top:20px;
    overflow-y: scroll;
    overflow-x: hidden;
-   background-color:rgb(163, 163, 163);
-   border: 1px solid rgb(163, 163, 163);
-   border-radius: 5px;
+   background-color:#3E54AC;
+   border: 1px solid #3E54AC;
+   border-radius: 15px;
 }

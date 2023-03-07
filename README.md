@@ -12,4 +12,8 @@ run `npm start` in the root directory of the project in the terminal, this will 
 Now open another terminal in the same directory and run `mongod`, this will establish a connection between server and database locally.
 
 You can view the app on your browser at `http://localhost:8000/`.
+To check the updated database install mongo shell by running `npm install mongosh`, and run `mongosh` in a new terminal.
+After entering the mongo shell run `use mydb`
+then run `db.todo.find()`.
+This will display the contents of the database.
 Thank you.

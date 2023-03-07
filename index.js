@@ -1,44 +1,7 @@
 const express = require('express');
 const app = express();
+const { MongoClient } = require('mongodb');
 const port = 8000;
-
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-const mySchema = new mongoose.Schema({
-  name: String,
-  age: Number,
-  email: String,
-});
-
-const MyModel = mongoose.model('MyModel', mySchema);
-
-const newData = new MyModel({
-  name: 'John',
-  age: 30,
-  email: 'john@example.com',
-});
-
-newData.save((err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('Data saved successfully.');
-  }
-});
-
-
-//use express router
-app.use('/', require('./routes'));
-app.use(express.static('views'));
-//setup view engine 
-app.set('view engine','ejs');
-app.set('views','./views');
-
-  
 
 const bodyParser = require('body-parser');
 const fs = require('fs'); //TO READ JSON FILE
@@ -46,15 +9,71 @@ const fs = require('fs'); //TO READ JSON FILE
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
+//verify connection to mongodb
+const uri = 'mongodb://127.0.0.1:27017'
+const client = new MongoClient(uri);
+
+async function connect() {
+  try {
+    await client.connect();
+    console.log('Connected to MongoDB');
+  } catch (err) {
+    console.error('Error connecting to MongoDB', err);
+  }
+}
+
+connect();
+
+async function insertData(jsonData) {
+  try {
+    connect()
+    const db = client.db('mydb');
+    const collection = db.collection('todo');
+    const documents = jsonData.map((d) => ({ ...d }));
+    const result = await collection.insertMany(documents);
+    console.log(result);
+  } catch (err) {
+    console.error(err);
+  } finally {
+    await client.close();
+  }
+}
+
+//use express router
+app.use('/', require('./routes'));
+app.use(express.static('views'));
+
+//setup view engine 
+app.set('view engine','ejs');
+app.set('views','./views');
+
+  
+async function deleteAllDocumentsInCollection() {
+  connect()
+  const db = client.db('mydb');
+  const collection = db.collection('todo');
+  
+  try {
+    const result = await collection.deleteMany({});
+    console.log(result.deletedCount + ' documents deleted');
+  } catch (err) {
+    console.error(err);
+  } finally {
+    client.close();
+  }
+}
+
+
+
 
 //HANDLES THE THE FORM DATA WHEN SUBMITTED
 app.post('/', function(req, res) {
   let data =[];
-  console.log('hello');
+  console.log('added task');
 const currentData = req.body;
 const raw = fs.readFileSync('data.json');
 
-//CHECK IS JSON FILE IS EMPTY AND HANDLE ACCORDINGLY
+//CHECK IF JSON FILE IS EMPTY AND HANDLE ACCORDINGLY
 if(raw == ''){
   data.push(currentData);
 }
@@ -75,12 +94,11 @@ fs.writeFile('data.json', JSON.stringify(data), 'utf8', (err) => {
         if (err) {
           console.error(err);
           res.send('write error');
-        } else {
-            
-          res.send('Success');
         }
-      });
-
+});
+  
+  deleteAllDocumentsInCollection()
+  insertData(data)
   var home = 'home';
   
   res.render('home', { data: data, title:home });
@@ -121,8 +139,12 @@ fs.writeFile('data.json', JSON.stringify(data), 'utf8', (err) => {
           
         }
       });
-
+  if (data !== '') {
+    console.log('all documents deleted')
+    deleteAllDocumentsInCollection()
+  }
   
+insertData(data)
   console.log(data);
   res.render('home.ejs', { data: data, title:'home' });
   
